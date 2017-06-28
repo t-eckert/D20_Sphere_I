@@ -1,0 +1,6 @@
+D20 Sphere I
+Thomas Eckert
+26 June 2017
+
+Based on GEANT exampleB1.
+r = 2.44 cm sphere at (0,0,0) with neutron E = 14.03 MeV incident from 7 deg above zx horizon.
