@@ -23,20 +23,40 @@ DetectorConstruction::~DetectorConstruction()
 
 G4VPhysicalVolume* DetectorConstruction::Construct()
 {
+
+  // Materials ================================================================
   // Get NIST material manager
   G4NistManager* nist = G4NistManager::Instance();
-
-  // World volume
-  G4double world_sizeXY = 10*cm;
-  G4double world_sizeZ = 100*cm;
 
   // Create a low-density gas to act as vacuum
   density = universe_mean_density;
   pressure = 1.e-19*pascal;
   temperature = 0.1*kelvin;
-  new G4material(name="Vacuum", z=1., a=1.01*g/mole, density, kStateGas,
-    temperature, pressure);
-  G4Material* world_mat = FindOrBuildMaterial("Vacuum") // ** This may be wrong
+  G4Material* vacuum = new G4material(name="Vacuum", z=1., a=1.01*g/mole,
+    density, kStateGas, temperature, pressure);
+
+  // Get deuterium isotope and create deuterium element
+  G4Isotope* isoD = new G4Isotope(name="Deuterium (Isotope)", iz=1, n=2,
+    a=2.014*g/mole);
+  G4Element* elD = new G4Element(name="Deuterium", symbol="D", ncomponents=1);
+  elD->AddIsotope(isoD, abundance=1*perCent);
+
+  // Define Oxygen
+  G4Element* elO = new G4Element(name="Oxygen", symbol="O", z=8., a=16.00*g/mole);
+
+  // Create Heavy Water
+  density = 1.11*g/cm3;
+  G4Material* D2O = new G4Material(name="Heavy Water", density, ncomponents=2);
+  D20->AddElement(elD, natoms=2);
+  D2O->AddElement(elO, natoms=1);
+
+  // World ====================================================================
+  // World volume
+  G4double world_sizeXY = 10*cm;
+  G4double world_sizeZ = 200*cm;
+
+  // Fill with vacuum
+  G4Material* world_mat = FindOrBuildMaterial("Vacuum")
 
   G4Box* solidWorld = new G4Box( "Chamber",
     0.5*world_sizeXY, 0.5*world_sizeXY, 0.5*world_sizeZ );
@@ -57,20 +77,6 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   // D2O Sphere ===============================================================
 
-  // Get deuterium isotope and create deuterium element
-  G4Isotope* isoD = new G4Isotope(name="Deuterium (Isotope)", iz=1, n=2,
-    a=2.014*g/mole);
-  G4Element* elD = new G4Element(name="Deuterium", symbol="D", ncomponents=1);
-  elD->AddIsotope(isoD, abundance=1*perCent);
-
-  // Define Oxygen
-  G4Element* elO = new G4Element(name="Oxygen", symbol="O", z=8., a=16.00*g/mole);
-
-  // Create Heavy Water
-  density = 1.11*g/cm3;
-  G4Material D2O = new G4Material(name="Heavy Water", density, ncomponents=2);
-  D20->AddElement(elD, natoms=2);
-  D2O->AddElement(elO, natoms=1);
 
   // Define the material and location of the sphere
   G4Material* material_D20_Sphere = FindOrBuildMaterial("Heavy Water");
@@ -104,7 +110,36 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                     0,                        // copy number
                     true);                    // check for overlapping
 
-  
+  // Scoring Volume ===========================================================
+  // Define material and position
+  G4Material* material_Scoring_Volume = FindOrBuildMaterial("Vacuum");
+  G4ThreeVector position_Scoring_Volume = G4ThreeVector(0,0,-80*cm);
+
+  // Thin Plane 10x10x0.01 cm
+  // Distances are given from halfpoint
+  G4double Scoring_Volume_x = 5*cm, Scoring_Volume_y = 5*cm;
+  G4double Scoring_Volume_z = 0.005*cm;
+
+  // Create a solid volume
+  G4Box* solid_Scoring_Volume =
+    new G4Box("Scoring Volume",
+              Scoring_Volume_x, Scoring_Volume_y, Scoring_Volume_z);
+
+  G4LogicalVolume* logical_Scoring_Volume =
+    new G4LogicalVolume(solid_Scoring_Volume,
+                        material_Scoring_Volume,
+                        "Scoring Volume");
+
+  new G4PVPlacement(0,
+                    position_Scoring_Volume,
+                    logical_Scoring_Volume,
+                    "Scoring Volume",
+                    logicWorld,
+                    false,
+                    0
+                    true);
+
+  fScoringVolume = logical_Scoring_Volume;
 
   return physWorld
 }
