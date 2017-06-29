@@ -1,9 +1,9 @@
 # $Id: GNUmakefile 68058 2013-03-13 14:47:43Z gcosmo $
 # --------------------------------------------------------------
-# GNUmakefile for D2O Sphere I 
+# GNUmakefile for examples module.  Gabriele Cosmo, 06/04/98.
 # --------------------------------------------------------------
 
-name := D2O_Sphere_I
+name := exampleB1
 G4TARGET := $(name)
 G4EXLIB := true
 
@@ -19,3 +19,4 @@ include $(G4INSTALL)/config/binmake.gmk
 visclean:
 	rm -f g4*.prim g4*.eps g4*.wrl
 	rm -f .DAWN_*
+
