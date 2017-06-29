@@ -35,24 +35,23 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 #----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
 #
-add_executable(exampleB1 exampleB1.cc ${sources} ${headers})
-target_link_libraries(exampleB1 ${Geant4_LIBRARIES})
+add_executable(D2O_Sphere_I D2O_Sphere_I.cc ${sources} ${headers})
+target_link_libraries(D2O_Sphere_I ${Geant4_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Copy all scripts to the build directory, i.e. the directory in which we
 # build B1. This is so that we can run the executable directly because it
 # relies on these scripts being in the current working directory.
 #
-set(EXAMPLEB1_SCRIPTS
-  exampleB1.in
-  exampleB1.out
+set(D2O_Sphere_I_SCRIPTS
+  D2O_Sphere_I.in
+  D2O_Sphere_I.out
   init_vis.mac
-  run1.mac
-  run2.mac
+  run.mac
   vis.mac
   )
 
-foreach(_script ${EXAMPLEB1_SCRIPTS})
+foreach(_script ${D2O_Sphere_I_SCRIPTS})
   configure_file(
     ${PROJECT_SOURCE_DIR}/${_script}
     ${PROJECT_BINARY_DIR}/${_script}
@@ -64,11 +63,9 @@ endforeach()
 # For internal Geant4 use - but has no effect if you build this
 # example standalone
 #
-add_custom_target(B1 DEPENDS exampleB1)
+add_custom_target(B1 DEPENDS D2O_Sphere_I)
 
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
-install(TARGETS exampleB1 DESTINATION bin)
-
-
+install(TARGETS D2O_Sphere_I DESTINATION bin)
