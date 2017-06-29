@@ -28,7 +28,6 @@ public:
 
 private:
   G4ParticleGun* fParticleGun; // pointer to a G4 gun class
-  G4Box* fEnvelopeBox;
 
 };
 
