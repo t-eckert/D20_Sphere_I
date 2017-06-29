@@ -3,7 +3,7 @@
 #----------------------------------------------------------------------------
 # Setup the project
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
-project(D2O_Sphere_I)
+project(geant4_D2O_Sphere_I)
 
 #----------------------------------------------------------------------------
 # Find Geant4 package, activating all available UI and Vis drivers by default
@@ -63,4 +63,4 @@ endforeach()
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
-install(TARGETS D2O_Sphere_I DESTINATION bin)
+install(TARGETS geant4_D2O_Sphere_I DESTINATION bin)
