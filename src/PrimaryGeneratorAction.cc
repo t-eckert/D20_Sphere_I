@@ -27,11 +27,12 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
   fParticleGun->SetParticleDefinition(particle);
 
   // Ramdomize initial momentum direction across hemisphere facing target
-  G4double cosTheta = G4UniformRand(); // z = [0,1], theta = [0,2pi]
-  G4double sinTheta = std::sqrt(1-cosTheta*cosTheta);
-  G4double phi = G4UniformRand()*pi;
+  //G4double cosTheta = G4UniformRand(); // z = [0,1], theta = [0,2pi]
+  //G4double sinTheta = std::sqrt(1-cosTheta*cosTheta);
+  //G4double phi = G4UniformRand()*pi;
 
-  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(std::sin(phi)*sinTheta,std::cos(phi)*sinTheta,-cosTheta));
+
+  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,-1.));
   fParticleGun->SetParticleEnergy(14.03*MeV);
 }
 

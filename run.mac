@@ -14,7 +14,7 @@
 /event/verbose 0
 /tracking/verbose 1
 #
-# gamma 6 MeV to the direction (0.,0.,1.)
+# 14.03 MeV neutrons in rand dir across hemisphere
 #
 /gun/particle neutron
 /gun/energy 14.03 MeV

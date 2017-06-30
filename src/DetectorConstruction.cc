@@ -20,12 +20,8 @@ DetectorConstruction::DetectorConstruction()
   fScoringVolume(0)
 { }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
 DetectorConstruction::~DetectorConstruction()
 { }
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 G4VPhysicalVolume* DetectorConstruction::Construct()
 {
@@ -50,6 +46,9 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4Material* D2O = new G4Material("Heavy Water", density, 2);
   D2O->AddElement(elD, 2);
   D2O->AddElement(elO, 1);
+
+  // Define Lead for scoring volume
+  G4Element* elPb = new G4Element("Lead", "Pb", 82, 207*g/mole);
 
   // World ====================================================================
   // World volume
@@ -117,7 +116,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   // Scoring Volume ===========================================================
   // Define material and position
-  G4Material* material_Scoring_Volume = vacuum;
+  G4Material* material_Scoring_Volume = elPb;
   G4ThreeVector position_Scoring_Volume = G4ThreeVector(0,0,-80*cm);
 
   // Thin Plane 10x10x0.01 cm
