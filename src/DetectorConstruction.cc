@@ -49,6 +49,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   // Define Lead for scoring volume
   G4Element* elPb = new G4Element("Lead", "Pb", 82, 207*g/mole);
+  G4Material* lead = new G4Material("Lead", 11.34*g/cm3, 1);
+  lead->AddElement(elPb,1);
 
   // World ====================================================================
   // World volume
@@ -116,7 +118,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   // Scoring Volume ===========================================================
   // Define material and position
-  G4Material* material_Scoring_Volume = elPb;
+  G4Material* material_Scoring_Volume = lead;
   G4ThreeVector position_Scoring_Volume = G4ThreeVector(0,0,-80*cm);
 
   // Thin Plane 10x10x0.01 cm
