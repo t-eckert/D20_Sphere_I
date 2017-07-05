@@ -13,8 +13,6 @@
 #include "G4PhysicalConstants.hh"
 #include "G4VisAttributes.hh"
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
 DetectorConstruction::DetectorConstruction()
 : G4VUserDetectorConstruction(),
   fScoringVolume(0)
@@ -149,5 +147,3 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   return physWorld;
 }
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
