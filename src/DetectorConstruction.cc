@@ -14,8 +14,7 @@
 #include "G4VisAttributes.hh"
 
 DetectorConstruction::DetectorConstruction()
-: G4VUserDetectorConstruction(),
-  fScoringVolume(0)
+: G4VUserDetectorConstruction()
 { }
 
 DetectorConstruction::~DetectorConstruction()
@@ -113,39 +112,6 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                     false,                    // no boolean operation
                     0,                        // copy number
                     true);                    // check for overlapping
-
-
-  // Scoring Volume ===========================================================
-  // Define material and position
-  G4Material* material_Scoring_Volume = lead;
-  G4ThreeVector position_Scoring_Volume = G4ThreeVector(0,0,-80*cm);
-
-  // Thin Plane 10x10x0.01 cm
-  // Distances are given from halfpoint
-  G4double Scoring_Volume_x = 5*cm, Scoring_Volume_y = 5*cm;
-  G4double Scoring_Volume_z = 0.005*cm;
-
-  // Create a solid volume
-  G4Box* solid_Scoring_Volume =
-    new G4Box("Scoring Volume",
-              Scoring_Volume_x, Scoring_Volume_y, Scoring_Volume_z);
-
-  G4LogicalVolume* logical_Scoring_Volume =
-    new G4LogicalVolume(solid_Scoring_Volume,
-                        material_Scoring_Volume,
-                        "Scoring Volume");
-
-  new G4PVPlacement(0,
-                    position_Scoring_Volume,
-                    logical_Scoring_Volume,
-                    "Scoring Volume",
-                    logicWorld,
-                    false,
-                    0,
-                    true);
-
-  fScoringVolume = logical_Scoring_Volume;
-
 
   return physWorld;
 }
