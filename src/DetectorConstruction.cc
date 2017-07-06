@@ -114,6 +114,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                     0,                        // copy number
                     true);                    // check for overlapping
 
+
   // Scoring Volume ===========================================================
   // Define material and position
   G4Material* material_Scoring_Volume = lead;
@@ -144,6 +145,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                     true);
 
   fScoringVolume = logical_Scoring_Volume;
+
 
   return physWorld;
 }

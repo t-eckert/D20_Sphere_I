@@ -26,13 +26,18 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
     = particleTable->FindParticle(particleName="neutron");
   fParticleGun->SetParticleDefinition(particle);
 
-  // Ramdomize initial momentum direction across hemisphere facing target
-  //G4double cosTheta = G4UniformRand(); // z = [0,1], theta = [0,2pi]
-  //G4double sinTheta = std::sqrt(1-cosTheta*cosTheta);
-  //G4double phi = G4UniformRand()*pi;
+  // Ramdomize initial momentum direction within a cone with
+  // a base equal to the cross section of the D2O Sphere
+  G4double theta = G4UniformRand()*twopi;
+  G4double phi = G4UniformRand()*0.25;
 
+  G4double x_momentum = std::cos(theta)*std::sin(phi);
+  G4double y_momentum = std::sin(theta)*std::sin(phi);
+  G4double z_momentum = std::cos(phi);
 
-  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,-1.));
+  G4ThreeVector momentum_dir = G4ThreeVector(x_momentum,y_momentum,-z_momentum);
+
+  fParticleGun->SetParticleMomentumDirection(momentum_dir);
   fParticleGun->SetParticleEnergy(14.03*MeV);
 }
 
