@@ -4,10 +4,12 @@
 #include "DetectorConstruction.hh"
 
 #include "G4Step.hh"
+#include "G4Track.hh"
 #include "G4Event.hh"
 #include "G4RunManager.hh"
 #include "G4LogicalVolume.hh"
 
+// Pointer to EventAction
 SteppingAction::SteppingAction(EventAction* eventAction)
 : G4UserSteppingAction(),
   fEventAction(eventAction),

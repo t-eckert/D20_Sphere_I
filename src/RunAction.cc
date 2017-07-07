@@ -11,7 +11,6 @@
 #include "G4UnitsTable.hh"
 #include "G4SystemOfUnits.hh"
 
-
 RunAction::RunAction()
 : G4UserRunAction(),
   fEdep(0.),
@@ -40,13 +39,12 @@ RunAction::~RunAction()
 
 void RunAction::BeginOfRunAction(const G4Run*)
 {
-  // inform the runManager to save random number seed
+  // Inform the runManager to save random number seed
   G4RunManager::GetRunManager()->SetRandomNumberStore(false);
 
-  // reset accumulables to their initial values
+  // Reset accumulables to their initial values
   G4AccumulableManager* accumulableManager = G4AccumulableManager::Instance();
   accumulableManager->Reset();
-
 }
 
 void RunAction::EndOfRunAction(const G4Run* run)

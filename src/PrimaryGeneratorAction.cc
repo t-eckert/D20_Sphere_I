@@ -50,6 +50,6 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
   // This function is called at the begining of each event
 
-  fParticleGun->SetParticlePosition(G4ThreeVector(0. ,0.,10.*cm));
+  fParticleGun->SetParticlePosition(G4ThreeVector(0.,0.,10.*cm));
   fParticleGun->GeneratePrimaryVertex(anEvent);
 }
