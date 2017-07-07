@@ -31,7 +31,7 @@
 /vis/drawVolume
 #
 # Specify view angle:
-/vis/viewer/set/viewpointVector 1 1 1
+/vis/viewer/set/viewpointVector 1 1 1 
 /vis/viewer/set/lightsVector -1 0 0
 #
 # Specify style (surface, wireframe, auxiliary edges,...)
@@ -78,7 +78,7 @@
 #
 # Axes, scale, etc.
 /vis/scene/add/scale   # Simple scale line
-#/vis/scene/add/axes    # Simple axes: x=red, y=green, z=blue.
+/vis/scene/add/axes    # Simple axes: x=red, y=green, z=blue.
 /vis/scene/add/eventID # Drawn at end of event
 /vis/scene/add/date    # Date stamp
 
@@ -91,10 +91,10 @@
 /vis/set/lineWidth     # Revert to default line width (1.)
 #
 # Attach text to one edge of Shape1, with a small, fixed offset
-#/vis/scene/add/text 0 0 0 cm 18 4 4 Heavy_Water_Sphere
+/vis/scene/add/text 0 0 0 cm 18 4 4 Heavy_Water_Sphere
 # Attach text to one corner of Shape2, with a small, fixed offset
-#/vis/scene/add/text 0 0 10 cm 18 4 4 Neutron_Source
-#/vis/scene/add/text 0 0 -80 cm 18 4 4 Lead_Scoring_Volume
+/vis/scene/add/text 0 0 10 cm 18 4 4 Neutron_Source
+/vis/scene/add/text 0 0 -80 cm 18 4 4 Lead_Scoring_Volume
 #
 # To get nice view
 /vis/viewer/set/style surface

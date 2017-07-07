@@ -11,6 +11,7 @@
 #include "G4UnitsTable.hh"
 #include "G4SystemOfUnits.hh"
 
+
 RunAction::RunAction()
 : G4UserRunAction(),
   fEdep(0.),
@@ -39,12 +40,13 @@ RunAction::~RunAction()
 
 void RunAction::BeginOfRunAction(const G4Run*)
 {
-  // Inform the runManager to save random number seed
+  // inform the runManager to save random number seed
   G4RunManager::GetRunManager()->SetRandomNumberStore(false);
 
-  // Reset accumulables to their initial values
+  // reset accumulables to their initial values
   G4AccumulableManager* accumulableManager = G4AccumulableManager::Instance();
   accumulableManager->Reset();
+
 }
 
 void RunAction::EndOfRunAction(const G4Run* run)
@@ -63,6 +65,13 @@ void RunAction::EndOfRunAction(const G4Run* run)
 
   G4double rms = edep2 - edep*edep/nofEvents;
   if (rms > 0.) rms = std::sqrt(rms); else rms = 0.;
+
+  const DetectorConstruction* detectorConstruction
+   = static_cast<const DetectorConstruction*>
+     (G4RunManager::GetRunManager()->GetUserDetectorConstruction());
+  G4double mass = detectorConstruction->GetScoringVolume()->GetMass();
+  G4double dose = edep/mass;
+  G4double rmsDose = rms/mass;
 
   // Run conditions
   //  note: There is no primary generator action object for "master"
@@ -96,6 +105,9 @@ void RunAction::EndOfRunAction(const G4Run* run)
   G4cout
      << G4endl
      << " The run consists of " << nofEvents << " "<< runCondition
+     << G4endl
+     << " Cumulated dose per run, in scoring volume : "
+     << G4BestUnit(dose,"Dose") << " rms = " << G4BestUnit(rmsDose,"Dose")
      << G4endl
      << "------------------------------------------------------------"
      << G4endl

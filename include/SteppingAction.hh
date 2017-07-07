@@ -5,6 +5,7 @@
 #include "globals.hh"
 
 class EventAction;
+
 class G4LogicalVolume;
 
 /// Stepping action class
@@ -20,6 +21,7 @@ class SteppingAction : public G4UserSteppingAction
 
   private:
     EventAction*  fEventAction;
+    G4LogicalVolume* fScoringVolume;
 };
 
 #endif
