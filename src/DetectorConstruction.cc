@@ -24,6 +24,8 @@ DetectorConstruction::~DetectorConstruction()
 G4VPhysicalVolume* DetectorConstruction::Construct()
 {
   // Materials ================================================================
+  G4NistManager* NIST_Manager = G4NistManager::Instance();
+
   // Create a low-density gas to act as vacuum
   G4double density = universe_mean_density;
   G4double pressure = 1.e-19*pascal;
@@ -45,10 +47,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   D2O->AddElement(elD, 2);
   D2O->AddElement(elO, 1);
 
-  // Define Lead for scoring volume
-  G4Element* elPb = new G4Element("Lead", "Pb", 82, 207*g/mole);
-  G4Material* lead = new G4Material("Lead", 11.34*g/cm3, 1);
-  lead->AddElement(elPb,1);
+  // Define polyethylene for Scoring Volume
+  G4Material* polyethylene = NIST_Manager->FindOrBuildMaterial("G4_POLYETHYLENE");  
 
   // World ====================================================================
   // World volume
@@ -117,7 +117,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   // Scoring Volume ===========================================================
   // Define material and position
-  G4Material* material_Scoring_Volume = lead;
+  G4Material* material_Scoring_Volume = polyethylene;
   G4ThreeVector position_Scoring_Volume = G4ThreeVector(0,0,-80*cm);
 
   // Thin Plane 10x10x0.01 cm
