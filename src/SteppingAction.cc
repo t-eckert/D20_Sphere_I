@@ -34,7 +34,8 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
   // check if we are in scoring volume
   if (volume != fScoringVolume) return;
 
-  // collect energy deposited in this step
+  // collect energy deposited in this step and position
   G4double edepStep = step->GetTotalEnergyDeposit();
-  fEventAction->AddEdep(edepStep);
+  // G4ThreeVector hit_position = step->GetPosition();
+  fEventAction->Collect(edepStep);
 }

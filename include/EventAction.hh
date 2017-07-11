@@ -17,7 +17,8 @@ class EventAction : public G4UserEventAction
     virtual void BeginOfEventAction(const G4Event* event);
     virtual void EndOfEventAction(const G4Event* event);
 
-    void AddEdep(G4double edep) { fEdep += edep; }
+    void Collect(G4double edep)
+    { fEdep += edep; }
 
   private:
     RunAction* fRunAction;
