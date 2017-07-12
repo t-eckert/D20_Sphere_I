@@ -41,6 +41,9 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   // Define Oxygen
   G4Element* elO = new G4Element("Oxygen", "O", 8., 16.00*g/mole);
 
+  // Define Lead
+  G4Material* lead = new G4Material("Lead",82., 207.2*g/mole, 11.34*g/cm3);
+
   // Create Heavy Water
   density = 1.11*g/cm3;
   G4Material* D2O = new G4Material("Heavy Water", density, 2);
@@ -48,7 +51,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   D2O->AddElement(elO, 1);
 
   // Define polyethylene for Scoring Volume
-  G4Material* polyethylene = NIST_Manager->FindOrBuildMaterial("G4_POLYETHYLENE");  
+  G4Material* polyethylene = NIST_Manager->FindOrBuildMaterial("G4_POLYETHYLENE");
 
   // World ====================================================================
   // World volume
@@ -117,13 +120,13 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   // Scoring Volume ===========================================================
   // Define material and position
-  G4Material* material_Scoring_Volume = polyethylene;
+  G4Material* material_Scoring_Volume = lead;// polyethylene;
   G4ThreeVector position_Scoring_Volume = G4ThreeVector(0,0,-80*cm);
 
   // Thin Plane 10x10x0.01 cm
   // Distances are given from halfpoint
   G4double Scoring_Volume_x = 5*cm, Scoring_Volume_y = 5*cm;
-  G4double Scoring_Volume_z = 0.005*cm;
+  G4double Scoring_Volume_z = 5*cm;
 
   // Create a solid volume
   G4Box* solid_Scoring_Volume =

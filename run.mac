@@ -4,7 +4,7 @@
 # or interactively: Idle> /control/execute run1.mac
 #
 # Change the default number of workers (in multi-threading mode)
-#/run/numberOfWorkers 4
+/run/numberOfThreads 24
 #
 # Initialize kernel
 /run/initialize
@@ -19,4 +19,4 @@
 /gun/particle neutron
 /gun/energy 14.03 MeV
 #
-/run/beamOn 100
+/run/beamOn 100000
