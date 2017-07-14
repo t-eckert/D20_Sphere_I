@@ -25,7 +25,7 @@ RunAction::RunAction()
 
   // Create an instance of analysisManager
   auto analysisManager = G4AnalysisManager::Instance();
-  analysisManager->CreateH1("Energy","Edep in Scoring Volume", 100, 0., 15*MeV);
+  analysisManager->CreateH1("Energy","Edep in Scoring Volume", 1500, 0., 15.*MeV);
 }
 
 RunAction::~RunAction()
@@ -57,7 +57,7 @@ void RunAction::EndOfRunAction(const G4Run* run)
   accumulableManager->Merge();
 
   auto analysisManager = G4AnalysisManager::Instance();
-  analysisManager->SetH1Plotting(0, true); 
+  // analysisManager->SetH1Plotting(0, true);
 
   //G4double edep  = fEdep.GetValue();
   //G4double edep2 = fEdep2.GetValue();

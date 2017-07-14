@@ -120,13 +120,13 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   // Scoring Volume ===========================================================
   // Define material and position
-  G4Material* material_Scoring_Volume = lead;// polyethylene;
+  G4Material* material_Scoring_Volume = polyethylene;
   G4ThreeVector position_Scoring_Volume = G4ThreeVector(0,0,-80*cm);
 
   // Thin Plane 10x10x0.01 cm
   // Distances are given from halfpoint
   G4double Scoring_Volume_x = 5*cm, Scoring_Volume_y = 5*cm;
-  G4double Scoring_Volume_z = 5*cm;
+  G4double Scoring_Volume_z = 0.1*cm;
 
   // Create a solid volume
   G4Box* solid_Scoring_Volume =
@@ -147,8 +147,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                     0,
                     true);
 
+  // Identify the scoring volume
   fScoringVolume = logical_Scoring_Volume;
-
 
   return physWorld;
 }
