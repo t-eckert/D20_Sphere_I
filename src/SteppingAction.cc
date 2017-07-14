@@ -32,12 +32,13 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
     = step->GetPreStepPoint()->GetTouchableHandle()
       ->GetVolume()->GetLogicalVolume();
 
-  G4String process_type = G4VProcess::GetProcessName();
-
+  // Get the name of the process in the step
+  G4String process_name = step->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName();
+  G4cout << process_name;
   // check if we are in scoring volume
   if (volume != fScoringVolume) return;
 
-  // collect energy deposited in this step and position
+  // collect energy deposited in this step
   G4double edepStep = step->GetTotalEnergyDeposit();
   // G4ThreeVector hit_position = step->GetPosition();
   fEventAction->Collect(edepStep);
