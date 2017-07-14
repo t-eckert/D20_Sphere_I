@@ -7,6 +7,7 @@
 #include "G4Event.hh"
 #include "G4RunManager.hh"
 #include "G4LogicalVolume.hh"
+#include "G4VProcess.hh"
 
 SteppingAction::SteppingAction(EventAction* eventAction)
 : G4UserSteppingAction(),
@@ -30,6 +31,8 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
   G4LogicalVolume* volume
     = step->GetPreStepPoint()->GetTouchableHandle()
       ->GetVolume()->GetLogicalVolume();
+
+  G4String process_type = G4VProcess::GetProcessName();
 
   // check if we are in scoring volume
   if (volume != fScoringVolume) return;

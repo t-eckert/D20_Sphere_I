@@ -25,7 +25,9 @@ RunAction::RunAction()
 
   // Create an instance of analysisManager
   auto analysisManager = G4AnalysisManager::Instance();
-  analysisManager->CreateH1("Energy","Edep in Scoring Volume", 1500, 0., 15.*MeV);
+  analysisManager->CreateH1("0","Edep in SV by non-interacting neutrons", 1500, 0., 15.*MeV);
+  analysisManager->CreateH1("1","Edep in SV by deuteron breakup neutrons", 1500, 0., 15.*MeV);
+  analysisManager->CreateH1("2","Edep in SV by elastically scattered neutrons", 1500, 0., 15.*MeV);
 }
 
 RunAction::~RunAction()
@@ -44,7 +46,9 @@ void RunAction::BeginOfRunAction(const G4Run*)
 
   // Open a file for the historgram
   auto analysisManager = G4AnalysisManager::Instance();
-  analysisManager->OpenFile("Energy_Histogram");
+  analysisManager->OpenFile("non-interact_neutrons_edep");
+  analysisManager->OpenFile("deutron_bkup_neutrons_edep");
+  analysisManager->OpenFile("elast_scatter_neutrons_edep");
 }
 
 void RunAction::EndOfRunAction(const G4Run* run)

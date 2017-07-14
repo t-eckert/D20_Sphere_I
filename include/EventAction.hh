@@ -23,6 +23,7 @@ class EventAction : public G4UserEventAction
   private:
     RunAction* fRunAction;
     G4double   fEdep;
+    G4int fNtag; 
 };
 
 #endif
