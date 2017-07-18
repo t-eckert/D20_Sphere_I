@@ -1,0 +1,22 @@
+# Macro file for example B1
+#
+# Can be run in batch, without graphic
+# or interactively: Idle> /control/execute run1.mac
+#
+# Change the default number of workers (in multi-threading mode)
+/run/numberOfThreads 24
+#
+# Initialize kernel
+/run/initialize
+#
+/control/verbose 2
+/run/verbose 2
+/event/verbose 2
+/tracking/verbose 2
+#
+# 14.03 MeV neutrons in rand dir across hemisphere
+#
+/gun/particle neutron
+/gun/energy 14.03 MeV
+#
+/run/beamOn 100000
