@@ -20,10 +20,14 @@ class EventAction : public G4UserEventAction
     void Collect(G4double edep)
     { fEdep += edep; }
 
+    void Kin(G4double kineticE)
+    { fKinetic = kineticE; }
+
   private:
     RunAction* fRunAction;
     G4double   fEdep;
-    G4int fNtag; 
+    G4int fNtag;
+    G4double fKinetic;
 };
 
 #endif

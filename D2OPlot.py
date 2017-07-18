@@ -9,7 +9,7 @@ from bokeh.models import HoverTool
 np.set_printoptions(threshold='nan')
 
 # Read in data from the histogram output by GEANT
-data = np.genfromtxt("/theory/tecke/geant4/D2O_Sphere_I-build/Energy_Histogram_h1_Energy.csv", delimiter=",", usecols=0, skip_header=8 )
+data = np.genfromtxt("/theory/tecke/geant4/D2O_Sphere_I-build/histogram_h1_edep_ni.csv", delimiter=",", usecols=0, skip_header=8 )
 
 f = open("hist_output","w")
 

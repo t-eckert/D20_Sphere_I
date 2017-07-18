@@ -24,10 +24,12 @@ class RunAction : public G4UserRunAction
     virtual void   EndOfRunAction(const G4Run*);
 
     void Collect(G4double edep);
+    void Kin(G4double kineticE);
 
   private:
     G4Accumulable<G4double> fEdep;
     G4Accumulable<G4double> fEdep2;
+    G4Accumulable<G4double> fKinetic;
 };
 
 #endif

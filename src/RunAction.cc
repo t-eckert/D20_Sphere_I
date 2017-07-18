@@ -16,7 +16,8 @@
 RunAction::RunAction()
 : G4UserRunAction(),
   fEdep(0.),
-  fEdep2(0.)
+  fEdep2(0.),
+  fKinetic(0.)
 {
   // Register accumulable to the accumulable manager
   G4AccumulableManager* accumulableManager = G4AccumulableManager::Instance();
@@ -25,9 +26,12 @@ RunAction::RunAction()
 
   // Create an instance of analysisManager
   auto analysisManager = G4AnalysisManager::Instance();
-  analysisManager->CreateH1("0","Edep in SV by non-interacting neutrons", 1500, 0., 15.*MeV);
-  analysisManager->CreateH1("1","Edep in SV by deuteron breakup neutrons", 1500, 0., 15.*MeV);
-  analysisManager->CreateH1("2","Edep in SV by elastically scattered neutrons", 1500, 0., 15.*MeV);
+/*
+  analysisManager->CreateH1("edep_ni","Edep in SV by non-interacting neutrons", 1500, 0., 15.*MeV);
+  analysisManager->CreateH1("edep_db","Edep in SV by deuteron breakup neutrons", 1500, 0., 15.*MeV);
+  analysisManager->CreateH1("edep_es","Edep in SV by elastically scattered neutrons", 1500, 0., 15.*MeV);
+  */
+  analysisManager->CreateH1("ke","Kinetic Energy in SV", 1500, 0., 15.*MeV);
 }
 
 RunAction::~RunAction()
@@ -46,9 +50,7 @@ void RunAction::BeginOfRunAction(const G4Run*)
 
   // Open a file for the historgram
   auto analysisManager = G4AnalysisManager::Instance();
-  analysisManager->OpenFile("non-interact_neutrons_edep");
-  analysisManager->OpenFile("deutron_bkup_neutrons_edep");
-  analysisManager->OpenFile("elast_scatter_neutrons_edep");
+  analysisManager->OpenFile("histogram");
 }
 
 void RunAction::EndOfRunAction(const G4Run* run)
@@ -112,9 +114,13 @@ void RunAction::Collect(G4double edep)
 {
   fEdep  += edep;
   fEdep2 += edep*edep;
-
   // Split threevector into x,y,z.
   /*4double x_pos = position.x();
   G4double y_pos = position.y();
   G4double z_pos = position.z();*/
+}
+
+void RunAction::Kin(G4double kineticE)
+{
+  fKinetic = kineticE;
 }
