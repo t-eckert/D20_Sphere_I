@@ -28,8 +28,8 @@ class HitAction : public G4VHit
   public:
     inline void SetEdep(G4double de) { edep = de; }
     inline G4double GetEdep() const { return edep; }
-    inline void SetPos(G4ThreeVector xyz) { pos = xyz; }
-    inline G4ThreeVector GetPos() const { return pos; }
+    //inline void SetPos(G4ThreeVector xyz) { pos = xyz; }
+    //inline G4ThreeVector GetPos() const { return pos; }
 };
 
 typedef G4THitsCollection<HitAction> HitAction_Collection;

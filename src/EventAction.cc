@@ -8,7 +8,7 @@
 EventAction::EventAction(RunAction* runAction)
 : G4UserEventAction(),
   fRunAction(runAction),
-  fEdep(0.)
+  fEdep(0.), fKinetic(0.)
 {}
 
 EventAction::~EventAction()
@@ -18,6 +18,7 @@ void EventAction::BeginOfEventAction(const G4Event*)
 {
   // Set the energy deposited to zero.
   fEdep = 0.;
+  fKinetic = 0.;
 }
 
 void EventAction::EndOfEventAction(const G4Event*)
@@ -28,6 +29,8 @@ void EventAction::EndOfEventAction(const G4Event*)
   // Fill histogram
   analysisManager->FillH1(0, fEdep);
 
+  if(fKinetic != 0.)
+  G4cout << fKinetic << G4endl;
   // accumulate statistics in run action
-  fRunAction->Collect(fEdep);
+  fRunAction->Collect(fEdep,fKinetic);
 }

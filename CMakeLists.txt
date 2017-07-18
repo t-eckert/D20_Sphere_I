@@ -48,6 +48,7 @@ set(D2O_Sphere_I_SCRIPTS
   D2O_Sphere_I.out
   init_vis.mac
   run.mac
+  run_test.mac
   vis.mac
   )
 
