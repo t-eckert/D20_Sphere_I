@@ -9,25 +9,14 @@
 # Initialize kernel
 /run/initialize
 #
-<<<<<<< HEAD
 /control/verbose 0
 /run/verbose 0
 /event/verbose 0
 /tracking/verbose 0
-=======
-/control/verbose 2
-/run/verbose 2
-/event/verbose 2
-/tracking/verbose 2
->>>>>>> 23b47b6d774256241e10640d906cb81dcdc8dd54
 #
 # 14.03 MeV neutrons in rand dir across hemisphere
 #
 /gun/particle neutron
 /gun/energy 14.03 MeV
 #
-<<<<<<< HEAD
 /run/beamOn 1000000
-=======
-/run/beamOn 100000
->>>>>>> 23b47b6d774256241e10640d906cb81dcdc8dd54

@@ -42,17 +42,11 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
 
   // collect energy deposited in this step
   G4double edepStep = step->GetTotalEnergyDeposit();
-<<<<<<< HEAD
 
   // Collect Kinetic Energy of the particle
   G4Track* track = step->GetTrack();
   G4double kinetic_energy = track->GetKineticEnergy();
   G4cout << kinetic_energy;
-=======
-  G4Track* track = step->GetTrack();
-  G4double kineticEnergy = track->GetKineticEnergy();
-  G4cout << kineticEnergy;
->>>>>>> 23b47b6d774256241e10640d906cb81dcdc8dd54
   // G4ThreeVector hit_position = step->GetPosition();
   fEventAction->Collect(edepStep, kinetic_energy);
 }

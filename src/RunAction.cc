@@ -114,12 +114,9 @@ void RunAction::Collect(G4double edep, G4double kinetic_energy)
 {
   fEdep  += edep;
   fEdep2 += edep*edep;
-<<<<<<< HEAD
 
   fKinetic = kinetic_energy;
 
-=======
->>>>>>> 23b47b6d774256241e10640d906cb81dcdc8dd54
   // Split threevector into x,y,z.
   /*4double x_pos = position.x();
   G4double y_pos = position.y();
