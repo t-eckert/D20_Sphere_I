@@ -26,7 +26,12 @@ RunAction::RunAction()
 
   // Create an instance of analysisManager
   auto analysisManager = G4AnalysisManager::Instance();
-  analysisManager->CreateH1("Energy","Edep in Scoring Volume", 1500, 0., 15.*MeV);
+/*
+  analysisManager->CreateH1("edep_ni","Edep in SV by non-interacting neutrons", 1500, 0., 15.*MeV);
+  analysisManager->CreateH1("edep_db","Edep in SV by deuteron breakup neutrons", 1500, 0., 15.*MeV);
+  analysisManager->CreateH1("edep_es","Edep in SV by elastically scattered neutrons", 1500, 0., 15.*MeV);
+  */
+  analysisManager->CreateH1("ke","Kinetic Energy in SV", 1500, 0., 15.*MeV);
 }
 
 RunAction::~RunAction()
@@ -45,7 +50,7 @@ void RunAction::BeginOfRunAction(const G4Run*)
 
   // Open a file for the historgram
   auto analysisManager = G4AnalysisManager::Instance();
-  analysisManager->OpenFile("Energy_Histogram");
+  analysisManager->OpenFile("histogram");
 }
 
 void RunAction::EndOfRunAction(const G4Run* run)
@@ -109,11 +114,19 @@ void RunAction::Collect(G4double edep, G4double kinetic_energy)
 {
   fEdep  += edep;
   fEdep2 += edep*edep;
+<<<<<<< HEAD
 
   fKinetic = kinetic_energy;
 
+=======
+>>>>>>> 23b47b6d774256241e10640d906cb81dcdc8dd54
   // Split threevector into x,y,z.
   /*4double x_pos = position.x();
   G4double y_pos = position.y();
   G4double z_pos = position.z();*/
+}
+
+void RunAction::Kin(G4double kineticE)
+{
+  fKinetic = kineticE;
 }

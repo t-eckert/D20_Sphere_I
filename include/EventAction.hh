@@ -20,6 +20,9 @@ class EventAction : public G4UserEventAction
     void Collect(G4double edep, G4double kinetic_energy)
     { fEdep += edep; }
 
+    void Kin(G4double kineticE)
+    { fKinetic = kineticE; }
+
   private:
     RunAction* fRunAction;
     G4double   fEdep;

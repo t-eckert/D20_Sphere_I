@@ -3,6 +3,7 @@
 #include "RunAction.hh"
 #include "EventAction.hh"
 #include "SteppingAction.hh"
+#include "TrackingAction.hh"
 
 ActionInitialization::ActionInitialization()
  : G4VUserActionInitialization()
@@ -26,6 +27,8 @@ void ActionInitialization::Build() const
 
   EventAction* eventAction = new EventAction(runAction);
   SetUserAction(eventAction);
+  SetUserAction(eventAction);
 
   SetUserAction(new SteppingAction(eventAction));
+  SetUserAction(new TrackingAction(eventAction));
 }
