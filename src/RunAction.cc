@@ -17,7 +17,7 @@ RunAction::RunAction()
 : G4UserRunAction(),
   fEdep(0.),
   fEdep2(0.),
-  fKinetic(0.)
+  fData(), fName()
 {
   // Register accumulable to the accumulable manager
   G4AccumulableManager* accumulableManager = G4AccumulableManager::Instance();
@@ -110,15 +110,9 @@ void RunAction::EndOfRunAction(const G4Run* run)
   analysisManager->CloseFile();
 }
 
-void RunAction::Collect(G4double edep, G4double kinetic_energy)
+void RunAction::Collect(G4double* data, G4String* name)
 {
+  G4double edep = data[2];
   fEdep  += edep;
   fEdep2 += edep*edep;
-
-  fKinetic = kinetic_energy;
-
-  // Split threevector into x,y,z.
-  /*4double x_pos = position.x();
-  G4double y_pos = position.y();
-  G4double z_pos = position.z();*/
 }

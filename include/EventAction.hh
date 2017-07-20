@@ -17,16 +17,17 @@ class EventAction : public G4UserEventAction
     virtual void BeginOfEventAction(const G4Event* event);
     virtual void EndOfEventAction(const G4Event* event);
 
-    void Collect(G4double edep, G4double kinetic_energy)
-    { fEdep += edep; }
-
-    void Kin(G4double kineticE)
-    { fKinetic = kineticE; }
+    void Collect(G4double data[7], G4String name[2])
+    {
+      G4double edep = data[2];
+      fEdep += edep;
+    }
 
   private:
     RunAction* fRunAction;
     G4double   fEdep;
-    G4double   fKinetic;
+    G4double fData[7];
+    G4double fName[2];
 };
 
 #endif

@@ -60,9 +60,10 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
   G4String particle_name = track->GetDefinition()->GetParticleName();
 
   // Fill the data array
-  G4double data [7] = {track_ID,inDet,edepStep,kinetic_energy,x_pos,y_pos,z_pos};
+  G4double data[7] = {track_ID,inDet,edepStep,kinetic_energy,x_pos,y_pos,z_pos};
   // Fill the name array
-  G4String name [2] = {particle_name,process_name};
+  G4String name[2] = {particle_name,process_name};
 
+  //G4cout << name[0];
   fEventAction->Collect(data, name);
 }
