@@ -33,20 +33,36 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
   G4LogicalVolume* volume
     = step->GetPreStepPoint()->GetTouchableHandle()
       ->GetVolume()->GetLogicalVolume();
+  // check if we are in scoring volume
+  G4double inDet = 0.;
+  if (volume == fScoringVolume) inDet = 1.;
 
   // Get the name of the process in the step
-  //G4String process_name = step->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName();
-  //G4cout << process_name;
-  // check if we are in scoring volume
-  if (volume != fScoringVolume) return;
+  G4String process_name = step->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName();
 
   // collect energy deposited in this step
   G4double edepStep = step->GetTotalEnergyDeposit();
 
-  // Collect Kinetic Energy of the particle
+  // Point to the track
   G4Track* track = step->GetTrack();
+  // Get the ID of the track and convert type to G4double
+  G4int trackID = track->GetTrackID();
+  G4double track_ID = G4double(trackID);
+  // Get the kinetic energy
   G4double kinetic_energy = track->GetKineticEnergy();
-  G4cout << kinetic_energy;
-  // G4ThreeVector hit_position = step->GetPosition();
-  fEventAction->Collect(edepStep, kinetic_energy);
+  // Get the position of the particle and separate it into x,y,z
+  G4ThreeVector position = track->GetPosition();
+  G4double x_pos = position.x();
+  G4double y_pos = position.y();
+  G4double z_pos = position.z();
+
+  // Get the name of the particle
+  G4String particle_name = track->GetDefinition()->GetParticleName();
+
+  // Fill the data array
+  G4double data [7] = {track_ID,inDet,edepStep,kinetic_energy,x_pos,y_pos,z_pos};
+  // Fill the name array
+  G4String name [2] = {particle_name,process_name};
+
+  fEventAction->Collect(data, name);
 }

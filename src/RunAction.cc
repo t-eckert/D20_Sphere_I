@@ -122,8 +122,3 @@ void RunAction::Collect(G4double edep, G4double kinetic_energy)
   G4double y_pos = position.y();
   G4double z_pos = position.z();*/
 }
-
-void RunAction::Kin(G4double kineticE)
-{
-  fKinetic = kineticE;
-}
