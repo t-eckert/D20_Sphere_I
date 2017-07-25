@@ -2,6 +2,9 @@
 #include "SteppingAction.hh"
 #include "EventAction.hh"
 #include "DetectorConstruction.hh"
+#include "Analysis.hh"
+
+#include "G4UIcommand.hh"
 
 #include "G4Step.hh"
 #include "G4Track.hh"
@@ -60,10 +63,20 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
   G4String particle_name = track->GetDefinition()->GetParticleName();
 
   // Fill the data array
-  G4double data[7] = {track_ID,inDet,edepStep,kinetic_energy,x_pos,y_pos,z_pos};
+  G4double data[7] = {inDet,track_ID,edepStep,kinetic_energy,x_pos,y_pos,z_pos};
   // Fill the name array
   G4String name[2] = {particle_name,process_name};
 
-  //G4cout << name[0];
-  fEventAction->Collect(data, name);
+
+  G4cout  << G4UIcommand::ConvertToString(data[0]) << "\t" 
+          << G4UIcommand::ConvertToString(data[1]) << "\t"
+          << G4UIcommand::ConvertToString(data[2]) << "\t"
+          << G4UIcommand::ConvertToString(data[3]) << "\t"
+          << G4UIcommand::ConvertToString(data[4]) << "\t"
+          << G4UIcommand::ConvertToString(data[5]) << "\t"
+          << G4UIcommand::ConvertToString(data[6]) << "\t"
+          << name[0] << "\t"
+          << name[1] << "\t" << G4endl;
+  // //G4cout << name[0];
+  // fEventAction->Collect(data, name);
 }

@@ -14,24 +14,25 @@
 
 
 RunAction::RunAction()
-: G4UserRunAction(),
-  fEdep(0.),
-  fEdep2(0.),
-  fData(), fName()
+: G4UserRunAction()
+  // fEdep(0.),
+  // fEdep2(0.),
+  // fData(), fName()
 {
   // Register accumulable to the accumulable manager
-  G4AccumulableManager* accumulableManager = G4AccumulableManager::Instance();
-  accumulableManager->RegisterAccumulable(fEdep);
-  accumulableManager->RegisterAccumulable(fEdep2);
+  // G4AccumulableManager* accumulableManager = G4AccumulableManager::Instance();
+  // accumulableManager->RegisterAccumulable(fEdep);
+  // accumulableManager->RegisterAccumulable(fEdep2);
 
   // Create an instance of analysisManager
-  auto analysisManager = G4AnalysisManager::Instance();
+  //auto analysisManager = G4AnalysisManager::Instance();
 /*
   analysisManager->CreateH1("edep_ni","Edep in SV by non-interacting neutrons", 1500, 0., 15.*MeV);
   analysisManager->CreateH1("edep_db","Edep in SV by deuteron breakup neutrons", 1500, 0., 15.*MeV);
   analysisManager->CreateH1("edep_es","Edep in SV by elastically scattered neutrons", 1500, 0., 15.*MeV);
   */
-  analysisManager->CreateH1("ke","Kinetic Energy in SV", 1500, 0., 15.*MeV);
+  // analysisManager->CreateH1("ke","Kinetic Energy in SV", 1500, 0., 15.*MeV);
+//  analysisManager->OpenFile("D2O_Output");
 }
 
 RunAction::~RunAction()
@@ -45,12 +46,12 @@ void RunAction::BeginOfRunAction(const G4Run*)
   G4RunManager::GetRunManager()->SetRandomNumberStore(false);
 
   // reset accumulables to their initial values
-  G4AccumulableManager* accumulableManager = G4AccumulableManager::Instance();
-  accumulableManager->Reset();
+  // G4AccumulableManager* accumulableManager = G4AccumulableManager::Instance();
+  // accumulableManager->Reset();
 
-  // Open a file for the historgram
-  auto analysisManager = G4AnalysisManager::Instance();
-  analysisManager->OpenFile("histogram");
+  // // Open a file for the historgram
+  // auto analysisManager = G4AnalysisManager::Instance();
+  // analysisManager->OpenFile("histogram");
 }
 
 void RunAction::EndOfRunAction(const G4Run* run)
@@ -59,10 +60,10 @@ void RunAction::EndOfRunAction(const G4Run* run)
   if (nofEvents == 0) return;
 
   // Merge accumulables
-  G4AccumulableManager* accumulableManager = G4AccumulableManager::Instance();
-  accumulableManager->Merge();
+  // G4AccumulableManager* accumulableManager = G4AccumulableManager::Instance();
+  // accumulableManager->Merge();
 
-  auto analysisManager = G4AnalysisManager::Instance();
+//  auto analysisManager = G4AnalysisManager::Instance();
   // analysisManager->SetH1Plotting(0, true);
 
   //G4double edep  = fEdep.GetValue();
@@ -106,13 +107,12 @@ void RunAction::EndOfRunAction(const G4Run* run)
      << G4endl;
 
   // Output the histogram
-  analysisManager->Write();
-  analysisManager->CloseFile();
+  //analysisManager->CloseFile();
 }
 
-void RunAction::Collect(G4double* data, G4String* name)
-{
-  G4double edep = data[2];
-  fEdep  += edep;
-  fEdep2 += edep*edep;
-}
+// void RunAction::Collect(G4double* data, G4String* name)
+// {
+//   G4double edep = data[2];
+//   fEdep  += edep;
+//   fEdep2 += edep*edep;
+// }
