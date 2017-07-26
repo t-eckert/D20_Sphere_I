@@ -67,8 +67,9 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
   // Fill the name array
   G4String name[2] = {particle_name,process_name};
 
-
-  G4cout  << G4UIcommand::ConvertToString(data[0]) << "\t" 
+  if(inDet==1){
+  G4cout << "\t"
+	  << G4UIcommand::ConvertToString(data[0]) << "\t"
           << G4UIcommand::ConvertToString(data[1]) << "\t"
           << G4UIcommand::ConvertToString(data[2]) << "\t"
           << G4UIcommand::ConvertToString(data[3]) << "\t"
@@ -77,6 +78,7 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
           << G4UIcommand::ConvertToString(data[6]) << "\t"
           << name[0] << "\t"
           << name[1] << "\t" << G4endl;
+    }
   // //G4cout << name[0];
   // fEventAction->Collect(data, name);
 }

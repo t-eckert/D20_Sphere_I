@@ -40,7 +40,7 @@ int main(int argc, char** argv)
   runManager->SetUserInitialization(new DetectorConstruction());
 
   // Physics list
-  G4VModularPhysicsList* physicsList = new QBBC;
+  G4VModularPhysicsList* physicsList = new FTFP_BERT_HP;
   physicsList->SetVerboseLevel(0);
   runManager->SetUserInitialization(physicsList);
 
