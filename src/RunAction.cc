@@ -14,8 +14,7 @@
 
 
 RunAction::RunAction()
-: G4UserRunAction()
-  // fEdep(0.),
+: G4UserRunAction(),fTag(0)
   // fEdep2(0.),
   // fData(), fName()
 {
@@ -108,6 +107,10 @@ void RunAction::EndOfRunAction(const G4Run* run)
 
   // Output the histogram
   //analysisManager->CloseFile();
+}
+
+void RunAction::Tag(G4int tag){
+  fTag = tag;
 }
 
 // void RunAction::Collect(G4double* data, G4String* name)

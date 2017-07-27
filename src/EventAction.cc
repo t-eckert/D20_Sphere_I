@@ -6,10 +6,9 @@
 #include "G4RunManager.hh"
 
 EventAction::EventAction(RunAction* runAction)
-  : G4UserEventAction()
-//   fRunAction(runAction),
-//   fEdep(0.),
-//   fData(), fName()
+  : G4UserEventAction(),
+   fRunAction(runAction),
+   fTag(0)
 {}
 
 EventAction::~EventAction()
@@ -17,8 +16,8 @@ EventAction::~EventAction()
 
 void EventAction::BeginOfEventAction(const G4Event*)
 {
-  // Set the energy deposited to zero.
-  // fEdep = 0.;
+  // Set the tag to 0
+  fTag = 0;
 }
 
 void EventAction::EndOfEventAction(const G4Event*)
@@ -29,6 +28,8 @@ void EventAction::EndOfEventAction(const G4Event*)
   // Fill histogram
   //analysisManager->FillH1(0, fEdep);
 
+  fRunAction->Tag(fTag);
+  //G4cout << fTag;
   //G4cout << fName[0];
   // accumulate statistics in run action
   //fRunAction->Collect(fData,fName)

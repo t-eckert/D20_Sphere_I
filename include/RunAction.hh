@@ -23,9 +23,12 @@ class RunAction : public G4UserRunAction
     virtual void BeginOfRunAction(const G4Run*);
     virtual void   EndOfRunAction(const G4Run*);
 
+    void Tag(G4int tag);
+
     // void Collect(G4double* data, G4String* name);
 
   private:
+    G4int fTag;
     // G4Accumulable<G4double> fEdep;
     // G4Accumulable<G4double> fEdep2;
     // G4double fData[7];

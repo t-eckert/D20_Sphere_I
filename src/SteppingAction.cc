@@ -45,6 +45,7 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
 
   // collect energy deposited in this step
   G4double edepStep = step->GetTotalEnergyDeposit();
+  G4int nSecondaries = step->GetNumberOfSecondariesInCurrentStep();
 
   // Point to the track
   G4Track* track = step->GetTrack();
@@ -66,19 +67,22 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
   G4double data[7] = {inDet,track_ID,edepStep,kinetic_energy,x_pos,y_pos,z_pos};
   // Fill the name array
   G4String name[2] = {particle_name,process_name};
+  G4int tag = 0;
 
-  if(inDet==1){
-  G4cout << "\t"
-	  << G4UIcommand::ConvertToString(data[0]) << "\t"
-          << G4UIcommand::ConvertToString(data[1]) << "\t"
-          << G4UIcommand::ConvertToString(data[2]) << "\t"
-          << G4UIcommand::ConvertToString(data[3]) << "\t"
-          << G4UIcommand::ConvertToString(data[4]) << "\t"
-          << G4UIcommand::ConvertToString(data[5]) << "\t"
-          << G4UIcommand::ConvertToString(data[6]) << "\t"
-          << name[0] << "\t"
-          << name[1] << "\t" << G4endl;
-    }
+  G4cout << "nSecondaries: " << nSecondaries << G4endl;
+
+  // G4cout << "\t"
+	//   << G4UIcommand::ConvertToString(data[0]) << "\t"
+  //         << G4UIcommand::ConvertToString(data[1]) << "\t"
+  //         << G4UIcommand::ConvertToString(data[2]) << "\t"
+  //         << G4UIcommand::ConvertToString(data[3]) << "\t"
+  //         << G4UIcommand::ConvertToString(data[4]) << "\t"
+  //         << G4UIcommand::ConvertToString(data[5]) << "\t"
+  //         << G4UIcommand::ConvertToString(data[6]) << "\t"
+  //         << name[0] << "\t"
+  //         << name[1] << "\t" << G4endl;
+  //   }
+  fEventAction->Tag(tag);
   // //G4cout << name[0];
   // fEventAction->Collect(data, name);
 }

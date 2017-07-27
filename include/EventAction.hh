@@ -17,6 +17,10 @@ class EventAction : public G4UserEventAction
     virtual void BeginOfEventAction(const G4Event* event);
     virtual void EndOfEventAction(const G4Event* event);
 
+    void Tag(G4int tag){
+      fTag = tag;
+    }
+
     // void Collect(G4double data[7], G4String name[2])
     // {
     //   G4double edep = data[2];
@@ -24,7 +28,9 @@ class EventAction : public G4UserEventAction
     // }
 
   private:
-    // RunAction* fRunAction;
+    RunAction* fRunAction;
+    G4int fTag;
+
     // G4double   fEdep;
     // G4double fData[7];
     // G4double fName[2];
