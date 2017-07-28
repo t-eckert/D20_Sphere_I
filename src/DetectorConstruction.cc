@@ -86,7 +86,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
 
   // Define the material and location of the sphere
-  G4Material* material_D20_Sphere = D2O;
+  G4Material* material_D2O_Sphere = D2O;
   G4ThreeVector origin = G4ThreeVector(0,0,0);
 
   // Define the sphere's geometry
@@ -95,23 +95,23 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4double thetamin=0., thetamax=pi;
 
   // Create a solid volume
-  G4Sphere* solid_D20_Sphere =
-    new G4Sphere("D20 Sphere",                // name
+  G4Sphere* solid_D2O_Sphere =
+    new G4Sphere("D2O Sphere",                // name
                   rmin, rmax,                 // set radius
                   phimin, phimax,             // set phi angle
                   thetamin, thetamax);        // set theta angle
 
   // Create a logical volume
-  G4LogicalVolume* logical_D20_Sphere =
-    new G4LogicalVolume(solid_D20_Sphere,     // solid
-                        material_D20_Sphere,   // material
-                        "D20 Sphere");        // name
+  G4LogicalVolume* logical_D2O_Sphere =
+    new G4LogicalVolume(solid_D2O_Sphere,     // solid
+                        material_D2O_Sphere,   // material
+                        "D2O Sphere");        // name
 
   // Place the shape in space
   new G4PVPlacement(0,                        // no rotation
                     origin,                   // location at (0,0,0)
-                    logical_D20_Sphere,       // logical volume
-                    "D20 Sphere",             // name
+                    logical_D2O_Sphere,       // logical volume
+                    "D2O Sphere",             // name
                     logicWorld,               // mother volume
                     false,                    // no boolean operation
                     0,                        // copy number

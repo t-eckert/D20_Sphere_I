@@ -17,7 +17,7 @@ class EventAction : public G4UserEventAction
     virtual void BeginOfEventAction(const G4Event* event);
     virtual void EndOfEventAction(const G4Event* event);
 
-    void Tag(G4int tag){
+    void Tag(G4int tag, G4int step_number){
       fTag = tag;
     }
 

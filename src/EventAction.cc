@@ -17,7 +17,6 @@ EventAction::~EventAction()
 void EventAction::BeginOfEventAction(const G4Event*)
 {
   // Set the tag to 0
-  fTag = 0;
 }
 
 void EventAction::EndOfEventAction(const G4Event*)
@@ -28,7 +27,6 @@ void EventAction::EndOfEventAction(const G4Event*)
   // Fill histogram
   //analysisManager->FillH1(0, fEdep);
 
-  fRunAction->Tag(fTag);
   //G4cout << fTag;
   //G4cout << fName[0];
   // accumulate statistics in run action
